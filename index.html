@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spencer Andrew | Photography</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        if (window.tailwind) tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Custom Selection Color */
+        ::selection {
+            background-color: #c29b6f;
+            color: white;
+        }
+        /* Hide scrollbar when lightbox is open */
+        body.lightbox-open {
+            overflow: hidden;
+        }
+        .instagram-card { display: inline-block; width: 100%; }
+        .instagram-card .instagram-media { min-width: 0 !important; width: 100% !important; }
+    </style>
+</head>
+<body class="bg-[#f9f8f6] dark:bg-[#121212] min-h-screen text-[#2d2d2d] dark:text-gray-200 font-sans transition-colors duration-300">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-transparent py-6">
+        <div class="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+            
+            <!-- Logo Area -->
+            <div class="flex flex-col items-center cursor-pointer" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+                <div class="relative w-12 h-12 mb-1 flex items-center justify-center">
+                    <svg viewBox="0 0 100 100" class="w-full h-full text-[#b3885b]">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="3"/>
+                        <path d="M 50 5 L 60 40 L 95 50 L 60 60 L 50 95 L 40 60 L 5 50 L 40 40 Z" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+                        <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" stroke-width="4"/>
+                        <text x="50" y="58" font-size="28" font-weight="bold" text-anchor="middle" fill="currentColor" style="font-family: serif;">SA</text>
+                    </svg>
+                </div>
+                <span class="text-xl md:text-2xl tracking-[0.2em] font-semibold uppercase text-[#2d2d2d] dark:text-white">Spencer Andrew</span>
+                <span class="text-[0.65rem] md:text-xs tracking-[0.3em] text-[#555] dark:text-gray-400 mt-1">Photography</span>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8 text-sm tracking-widest uppercase font-medium">
+                <a href="#portfolio" class="hover:text-[#b3885b] dark:hover:text-[#b3885b] transition-colors">Portfolio</a>
+                <a href="#about" class="hover:text-[#b3885b] dark:hover:text-[#b3885b] transition-colors">About</a>
+                <a href="#contact" class="hover:text-[#b3885b] dark:hover:text-[#b3885b] transition-colors">Contact</a>
+            </div>
+
+            <!-- Mobile Menu Toggle & Theme Toggle -->
+            <div class="flex items-center space-x-4 md:space-x-0">
+                <button id="theme-toggle" class="text-[#2d2d2d] dark:text-white hover:text-[#b3885b] dark:hover:text-[#b3885b] transition-colors md:ml-8" aria-label="Toggle Dark Mode">
+                    <i data-lucide="moon" id="theme-icon-dark" class="w-6 h-6"></i>
+                    <i data-lucide="sun" id="theme-icon-light" class="w-6 h-6 hidden"></i>
+                </button>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-[#2d2d2d] dark:text-white">
+                    <i data-lucide="menu" id="menu-icon" class="w-7 h-7"></i>
+                    <i data-lucide="x" id="close-icon" class="w-7 h-7 hidden"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#f9f8f6] dark:bg-[#1a1a1a] shadow-lg border-t border-gray-200 dark:border-gray-800 md:hidden flex-col items-center py-6 space-y-6 text-sm tracking-widest uppercase font-medium">
+            <a href="#portfolio" class="mobile-link text-[#2d2d2d] dark:text-white hover:text-[#b3885b] transition-colors">Portfolio</a>
+            <a href="#about" class="mobile-link text-[#2d2d2d] dark:text-white hover:text-[#b3885b] transition-colors">About</a>
+            <a href="#contact" class="mobile-link text-[#2d2d2d] dark:text-white hover:text-[#b3885b] transition-colors">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-48 pb-20 px-6 md:px-12 max-w-7xl mx-auto flex flex-col items-center text-center">
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight text-[#1a1a1a] dark:text-white mb-6 max-w-4xl">
+            Capturing the <span class="italic text-[#b3885b]">authenticity</span> of the world around us, one photo at a time.
+        </h1>
+        <p class="text-lg md:text-xl text-gray-500 dark:text-gray-400 max-w-2xl mb-12 font-light">
+            A freelance photographer specializing in compelling visual storytelling.
+        </p>
+        <a href="#portfolio" class="border-b-2 border-[#b3885b] pb-1 uppercase tracking-widest text-sm font-semibold hover:text-[#b3885b] transition-colors">
+            View the Gallery
+        </a>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 px-4 md:px-8 max-w-[1600px] mx-auto min-h-screen">
+        
+        <!-- Category Filter -->
+        <div id="filter-container" class="flex flex-wrap justify-center gap-4 md:gap-8 mb-12">
+            <!-- Buttons dynamically generated by JS -->
+        </div>
+
+        <!-- Masonry Image Grid -->
+        <div id="portfolio-grid" class="columns-1 sm:columns-2 lg:columns-3 gap-4 md:gap-6 space-y-4 md:space-y-6">
+            <!-- Images dynamically generated by JS -->
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="hidden fixed inset-0 z-50 bg-black/95 flex items-center justify-center backdrop-blur-md">
+        <button id="lightbox-close" class="absolute top-6 right-6 text-white/70 hover:text-white transition-colors p-2 z-50">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        
+        <button id="lightbox-prev" class="absolute left-4 md:left-12 text-white/70 hover:text-white transition-colors p-4 z-50">
+            <i data-lucide="chevron-left" class="w-12 h-12"></i>
+        </button>
+        
+        <img id="lightbox-img" alt="Lightbox Image" class="max-h-[90vh] max-w-[90vw] object-contain shadow-2xl" />
+        
+        <button id="lightbox-next" class="absolute right-4 md:right-12 text-white/70 hover:text-white transition-colors p-4 z-50">
+            <i data-lucide="chevron-right" class="w-12 h-12"></i>
+        </button>
+
+        <div id="lightbox-counter" class="absolute bottom-6 left-0 right-0 text-center text-white/80 tracking-widest text-sm uppercase">
+            <!-- Counter dynamic -->
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 md:px-12 bg-white dark:bg-[#1a1a1a] transition-colors duration-300">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="relative group">
+                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=1000" alt="Spencer Andrew" class="w-full aspect-[4/5] object-cover shadow-lg" />
+                <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-[#f9f8f6] dark:bg-[#2d2d2d] -z-10 hidden md:block transition-colors duration-300"></div>
+            </div>
+            <div>
+                <h2 class="text-3xl md:text-5xl font-light mb-8 text-[#1a1a1a] dark:text-white">Behind the Lens</h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed font-light text-lg">
+                    Hi, I'm Spencer. I believe photography is more than just taking pictures; it's about capturing the fleeting, raw emotion of a moment and freezing it in time. With years of experience behind the camera, I aim to create timeless artwork that speaks for itself.
+                </p>
+                <p class="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed font-light text-lg">
+                    Based in the heart of the city, but always ready to travel for the perfect light. No matter the subject, my approach remains the same: sincere, deliberate, and fiercely artistic.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 px-6 md:px-12 max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-5xl font-light mb-6 text-[#1a1a1a] dark:text-white">Let's Work Together</h2>
+        <p class="text-gray-500 dark:text-gray-400 mb-12 font-light">Available for bookings worldwide. Fill out the form below or reach out directly.</p>
+        
+        <form class="space-y-8 text-left" onsubmit="event.preventDefault(); alert('Message sent! (Mock form)');">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2">Name</label>
+                    <input type="text" class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 focus:border-[#b3885b] dark:focus:border-[#b3885b] outline-none py-2 transition-colors dark:text-white" placeholder="Jane Doe" required />
+                </div>
+                <div>
+                    <label class="block text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2">Email</label>
+                    <input type="email" class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 focus:border-[#b3885b] dark:focus:border-[#b3885b] outline-none py-2 transition-colors dark:text-white" placeholder="jane@example.com" required />
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2">Type of Session</label>
+                <select class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 focus:border-[#b3885b] dark:focus:border-[#b3885b] outline-none py-2 transition-colors text-gray-700 dark:text-gray-300">
+                    <option class="dark:bg-[#1a1a1a]">Wedding & Elopement</option>
+                    <option class="dark:bg-[#1a1a1a]">Portrait Session</option>
+                    <option class="dark:bg-[#1a1a1a]">Editorial / Commercial</option>
+                    <option class="dark:bg-[#1a1a1a]">Other</option>
+                </select>
+            </div>
+            <div>
+                <label class="block text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-2">Message</label>
+                <textarea rows="4" class="w-full bg-transparent border-b border-gray-300 dark:border-gray-700 focus:border-[#b3885b] dark:focus:border-[#b3885b] outline-none py-2 transition-colors resize-none dark:text-white" placeholder="Tell me about your vision..." required></textarea>
+            </div>
+            <button type="submit" class="bg-[#2d2d2d] dark:bg-white text-white dark:text-[#1a1a1a] px-10 py-4 uppercase tracking-widest text-sm hover:bg-[#b3885b] dark:hover:bg-[#b3885b] dark:hover:text-white transition-colors w-full md:w-auto">
+                Send Inquiry
+            </button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#1a1a1a] text-white py-16 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
+            
+            <div class="flex flex-col items-center md:items-start">
+                <div class="text-xl tracking-[0.2em] font-semibold uppercase mb-1">Spencer Andrew</div>
+                <div class="text-xs tracking-[0.3em] text-gray-400">Photography</div>
+            </div>
+
+            <div class="flex space-x-6">
+                <a href="https://instagram.com/spencerphoto4k" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-[#b3885b] transition-colors">
+                    <i data-lucide="instagram" class="w-6 h-6"></i>
+                </a>
+            </div>
+
+            <div class="text-xs text-gray-500 tracking-widest uppercase">
+                &copy; <span id="year"></span> Spencer Andrew. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" class="fixed bottom-8 right-8 bg-[#2d2d2d] text-white p-3 shadow-lg hover:bg-[#b3885b] transition-all duration-300 z-40 opacity-0 pointer-events-none translate-y-4 rounded-full" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" aria-label="Scroll to top">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
+
+    <!-- Interactive Logic -->
+    <script>
+        // Initialize Icons
+        if (window.lucide) window.lucide.createIcons();
+
+        const safeStorage = {
+            getItem(key) { try { return localStorage.getItem(key); } catch { return null; } },
+            setItem(key, value) { try { localStorage.setItem(key, value); } catch {} }
+        };
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- Dark Mode Logic ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIconDark = document.getElementById('theme-icon-dark');
+        const themeIconLight = document.getElementById('theme-icon-light');
+
+        // Check system preference or localStorage
+        if (safeStorage.getItem('theme') === 'dark' || (!safeStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeIconDark.classList.add('hidden');
+            themeIconLight.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeIconDark.classList.remove('hidden');
+            themeIconLight.classList.add('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                safeStorage.setItem('theme', 'dark');
+                themeIconDark.classList.add('hidden');
+                themeIconLight.classList.remove('hidden');
+            } else {
+                safeStorage.setItem('theme', 'light');
+                themeIconDark.classList.remove('hidden');
+                themeIconLight.classList.add('hidden');
+            }
+        });
+
+        // Set url to a real photo path (for example, "images/photo-1.jpg")
+        // to use the masonry photo gallery and lightbox instead of an Instagram embed.
+        const PORTFOLIO_IMAGES = [
+            {
+                        "id": 1,
+                        "category": "Posts",
+                        "title": "Instagram Post #1",
+                        "url": "",
+                        "postUrl": "https://www.instagram.com/p/Dcm_VHwDMCA/"
+            },
+            {
+                        "id": 2,
+                        "category": "Posts",
+                        "title": "Instagram Post #2",
+                        "url": "",
+                        "postUrl": "https://www.instagram.com/p/DVKTc4ujHxC/"
+            },
+            {
+                        "id": 3,
+                        "category": "Posts",
+                        "title": "Instagram Post #3",
+                        "url": "",
+                        "postUrl": "https://www.instagram.com/p/DVKQx5TDFwt/"
+            },
+            {
+                        "id": 4,
+                        "category": "Posts",
+                        "title": "Instagram Post #4",
+                        "url": "",
+                        "postUrl": "https://www.instagram.com/p/DVKQFLvjOuS/"
+            },
+            {
+                        "id": 5,
+                        "category": "Posts",
+                        "title": "Instagram Post #5",
+                        "url": "",
+                        "postUrl": "https://www.instagram.com/p/DVKIfv7jkIQ/"
+            },
+            {
+                        "id": 6,
+                        "category": "Posts",
+                        "title": "Instagram Post #6",
+                        "url": "",
+                        "postUrl": "https://www.instagram.com/p/DPdGurpjN-O/"
+            }
+];
+        const CATEGORIES = ['All', ...new Set(PORTFOLIO_IMAGES.map(img => img.category))];
+
+        let activeCategory = 'All';
+        let filteredImages = [...PORTFOLIO_IMAGES];
+        let lightboxIndex = null;
+
+        // --- Scroll Effects (Navbar & Scroll to Top) ---
+        const navbar = document.getElementById('navbar');
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        window.addEventListener('scroll', () => {
+            // Navbar styling
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-[#f9f8f6]/95', 'dark:bg-[#121212]/95', 'backdrop-blur-sm', 'shadow-sm', 'py-3');
+                navbar.classList.remove('bg-transparent', 'py-6');
+            } else {
+                navbar.classList.remove('bg-[#f9f8f6]/95', 'dark:bg-[#121212]/95', 'backdrop-blur-sm', 'shadow-sm', 'py-3');
+                navbar.classList.add('bg-transparent', 'py-6');
+            }
+
+            // Scroll to Top button visibility
+            if (window.scrollY > 400) {
+                scrollToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+                scrollToTopBtn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            } else {
+                scrollToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+                scrollToTopBtn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            }
+        });
+
+        // --- Mobile Menu ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => link.addEventListener('click', () => {
+            if(!mobileMenu.classList.contains('hidden')) toggleMenu();
+        }));
+
+        // --- Portfolio Rendering ---
+        const filterContainer = document.getElementById('filter-container');
+        const portfolioGrid = document.getElementById('portfolio-grid');
+        let instagramScriptPromise;
+
+        function escapeHTML(value) {
+            return String(value).replace(/[&<>"']/g, char => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[char]));
+        }
+
+        function processInstagramEmbeds() {
+            if (window.instgrm && window.instgrm.Embeds) {
+                window.instgrm.Embeds.process();
+                return;
+            }
+            if (!instagramScriptPromise) {
+                instagramScriptPromise = new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = 'https://www.instagram.com/embed.js';
+                    script.async = true;
+                    script.onload = resolve;
+                    script.onerror = () => reject(new Error('Instagram embed script could not load.'));
+                    document.body.appendChild(script);
+                });
+            }
+            instagramScriptPromise.then(() => {
+                if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
+            }).catch(error => console.warn(error.message));
+        }
+
+        function renderFilters() {
+            filterContainer.replaceChildren();
+            CATEGORIES.forEach(category => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.textContent = category;
+                button.className = 'uppercase tracking-widest text-xs md:text-sm transition-all duration-300 pb-1 border-b-2 ' + (
+                    activeCategory === category
+                    ? 'border-[#b3885b] text-[#b3885b] font-semibold'
+                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-[#2d2d2d] dark:hover:text-white'
+                );
+                button.setAttribute('aria-pressed', String(activeCategory === category));
+                button.addEventListener('click', () => window.setCategory(category));
+                filterContainer.appendChild(button);
+            });
+        }
+
+        function renderGrid() {
+            const items = activeCategory === 'All'
+                ? PORTFOLIO_IMAGES
+                : PORTFOLIO_IMAGES.filter(img => img.category === activeCategory);
+            filteredImages = items.filter(img => img.url);
+
+            portfolioGrid.innerHTML = items.map(img => {
+                if (img.url) {
+                    const index = filteredImages.indexOf(img);
+                    return `
+                        <button type="button" class="photo-card relative group overflow-hidden cursor-pointer break-inside-avoid w-full block text-left" data-photo-index="${index}">
+                            <img src="${escapeHTML(img.url)}" alt="${escapeHTML(img.title)}"
+                                class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105"
+                                loading="lazy" decoding="async" />
+                            <span class="photo-overlay absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                <span class="text-center text-white p-4">
+                                    <span class="block text-xl tracking-widest uppercase mb-2">${escapeHTML(img.title)}</span>
+                                    <span class="block text-sm tracking-widest text-[#d4af82]">${escapeHTML(img.category)}</span>
+                                </span>
+                            </span>
+                            <span class="photo-error hidden p-6 text-sm text-red-700 dark:text-red-300"></span>
+                        </button>`;
+                }
+                if (img.postUrl) {
+                    return `
+                        <div class="break-inside-avoid instagram-card">
+                            <blockquote class="instagram-media" data-instgrm-permalink="${escapeHTML(img.postUrl)}" data-instgrm-version="14"
+                                style="background:#fff;border:0;margin:0;width:100%;min-width:0;padding:0;">
+                                <a href="${escapeHTML(img.postUrl)}" target="_blank" rel="noopener noreferrer"
+                                    style="display:block;padding:24px;color:#2d2d2d;">View ${escapeHTML(img.title)} on Instagram</a>
+                            </blockquote>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                                Post not showing?
+                                <a href="${escapeHTML(img.postUrl)}" target="_blank" rel="noopener noreferrer" class="underline">Open on Instagram</a>.
+                                Public posts with embedding enabled can appear here.
+                            </p>
+                        </div>`;
+                }
+                return `<p class="p-6 text-sm">No photo source configured for ${escapeHTML(img.title)}.</p>`;
+            }).join('');
+
+            portfolioGrid.querySelectorAll('[data-photo-index]').forEach(card => {
+                const image = card.querySelector('img');
+                const onError = () => {
+                    image.classList.add('hidden');
+                    card.querySelector('.photo-overlay').classList.add('hidden');
+                    const message = card.querySelector('.photo-error');
+                    message.textContent = `Photo could not load. Check the file path: ${image.getAttribute('src')}`;
+                    message.classList.remove('hidden');
+                    card.disabled = true;
+                };
+                image.addEventListener('error', onError, { once: true });
+                if (image.complete && image.naturalWidth === 0) onError();
+                card.addEventListener('click', () => window.openLightbox(Number(card.dataset.photoIndex)));
+            });
+            if (items.some(img => !img.url && img.postUrl)) processInstagramEmbeds();
+        }
+
+        window.setCategory = function(category) {
+            if (!CATEGORIES.includes(category)) return;
+            closeLightbox();
+            activeCategory = category;
+            renderFilters();
+            renderGrid();
+        };
+
+        // --- Lightbox ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        
+        window.openLightbox = function(index) {
+            if (!Number.isInteger(index) || !filteredImages[index]) return;
+            lightboxIndex = index;
+            updateLightbox();
+            lightbox.classList.remove('hidden');
+            document.body.classList.add('lightbox-open');
+        };
+
+        function closeLightbox() {
+            lightboxIndex = null;
+            lightbox.classList.add('hidden');
+            document.body.classList.remove('lightbox-open');
+        }
+
+        function nextImage(e) {
+            if(e) e.stopPropagation();
+            if (lightboxIndex !== null) {
+                lightboxIndex = (lightboxIndex + 1) % filteredImages.length;
+                updateLightbox();
+            }
+        }
+
+        function prevImage(e) {
+            if(e) e.stopPropagation();
+            if (lightboxIndex !== null) {
+                lightboxIndex = (lightboxIndex - 1 + filteredImages.length) % filteredImages.length;
+                updateLightbox();
+            }
+        }
+
+        function updateLightbox() {
+            const img = filteredImages[lightboxIndex];
+            if (!img) return;
+            lightboxImg.classList.remove('hidden');
+            lightboxImg.src = img.url;
+            lightboxImg.alt = img.title;
+            lightboxCounter.textContent = `${lightboxIndex + 1} / ${filteredImages.length}`;
+        }
+
+        lightboxImg.addEventListener('error', () => {
+            lightboxImg.classList.add('hidden');
+            lightboxCounter.textContent = 'Photo could not load. Check its file path.';
+        });
+
+        // Lightbox Event Listeners
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        document.getElementById('lightbox-next').addEventListener('click', nextImage);
+        document.getElementById('lightbox-prev').addEventListener('click', prevImage);
+        lightbox.addEventListener('click', closeLightbox);
+        lightboxImg.addEventListener('click', (e) => e.stopPropagation());
+
+        window.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('hidden')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+        });
+
+        // Initial Render
+        renderFilters();
+        renderGrid();
+    </script>
+</body>
+</html>
